@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var webpackCompression = require("compression-webpack-plugin")
 
 module.exports = function(grunt) {
     "use strict";
@@ -74,10 +75,19 @@ module.exports = function(grunt) {
             },
             prod: {
                 plugins: [
+                    new webpack.DefinePlugin({
+                        "process.env": {
+                            NODE_ENV: JSON.stringify("production")
+                        }
+                    }),
                     new webpack.optimize.UglifyJsPlugin({
                         compress: {
                             warnings: false
                         }
+                    }),
+                    new webpackCompression({
+                        test: /\.js$/,
+                        minRatio: 0.8
                     })
                 ]
             },
