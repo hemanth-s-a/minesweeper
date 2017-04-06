@@ -1,3 +1,5 @@
+var webpack = require("webpack");
+
 module.exports = function(grunt) {
     "use strict";
 
@@ -70,10 +72,17 @@ module.exports = function(grunt) {
                     path: __dirname + "/dist/client/",
                     filename: "bundle.js"
                 },
-                devtool: "eval-source-map"
+                plugins: [
+                    new webpack.optimize.UglifyJsPlugin({
+                        compress: {
+                            warnings: false
+                        }
+                    })
+                ]
             },
+            prod: {},
             dev: {
-                devtool: "sourcemap"
+                devtool: "eval-source-map"
             }
         }
     });
@@ -84,6 +93,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-webpack");
 
     grunt.registerTask("default", [
+        "copy", "babel", "webpack:prod"
+    ]);
+
+    grunt.registerTask("dev", [
         "copy", "babel", "webpack:dev", "watch"
     ]);
 };
