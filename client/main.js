@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Tile from "./components/Tile/index.jsx";
+import Game from "./components/Game/View.jsx";
 
 ReactDOM.render(
-    <Tile />,
+    <Game />,
     document.getElementById("root")
 );

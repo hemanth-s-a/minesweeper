@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: "./client",
                     src: ["**/*.js"],
-                    dest: "./dist/client",
+                    dest: "./dist/pre-webpack/client",
                     ext: ".js"
                 }, {
                     expand: true,
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: "./client",
                     src: ["**/*.jsx"],
-                    dest: "./dist/client",
+                    dest: "./dist/pre-webpack/client",
                     ext: ".jsx"
                 }]
             }
@@ -58,20 +58,21 @@ module.exports = function(grunt) {
             },
             webpack: {
                 files: [
-                    "dist/client/bundle.js",
-                    "dist/client/**/*.js",
-                    "dist/client/**/*.jsx"
+                    "dist/pre-webpack/client/**/*.js",
+                    "dist/pre-webpack/client/**/*.jsx"
                 ],
-                tasks: ["webpack"]
+                tasks: ["webpack:dev"]
             }
         },
         webpack: {
             options: {
-                entry: "./dist/client/main.js",
+                entry: "./dist/pre-webpack/client/main.js",
                 output: {
                     path: __dirname + "/dist/client/",
                     filename: "bundle.js"
-                },
+                }
+            },
+            prod: {
                 plugins: [
                     new webpack.optimize.UglifyJsPlugin({
                         compress: {
@@ -80,7 +81,6 @@ module.exports = function(grunt) {
                     })
                 ]
             },
-            prod: {},
             dev: {
                 devtool: "eval-source-map"
             }
