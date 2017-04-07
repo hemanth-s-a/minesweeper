@@ -12,7 +12,14 @@ class Game extends React.Component {
                 <div>
                     {
                         this.props.tiles.map((row, i) => {
-                            return (<Row tiles={row} key={i} />);
+                            return (
+                                <Row
+                                    tiles={row}
+                                    row={i}
+                                    key={i}
+                                    onClickHandler={this.props.onClickHandler}
+                                />
+                            );
                         })
                     }
                 </div>
@@ -22,7 +29,8 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-    tiles: React.PropTypes.array
+    tiles: React.PropTypes.array,
+    onClickHandler: React.PropTypes.func
 };
 
 Game.defaultProps = {

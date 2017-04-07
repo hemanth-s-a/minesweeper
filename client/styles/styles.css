@@ -3,4 +3,14 @@
     width: 15px;
     border: 1px solid black;
     display: inline-block;
+    margin: 1px;
+}
+
+.row {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.unopened {
+    background-color: #CCCCCC;
 }
